@@ -85,6 +85,7 @@ Then issue `vagrant up` command as usual.
 
 # Prerequisites
 
+* Create a user with sudo access to run below commands
 * Pip
 
 * To install ansible
