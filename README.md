@@ -80,7 +80,47 @@ vagrant destroy
 
 Then issue `vagrant up` command as usual.
 
+# To install Shareinsights through Ansible Scripts
+--------------------------------------------------------------------------------
 
+# Prerequisites
+
+* Pip
+
+* To install ansible
+
+```
+pip install ansible=2.4.0.0
+```
+
+* SSH configuration
+  * For CentOS
+     Edit /etc/ssh/sshd_config
+     ```
+     PasswordAuthentication yes
+     ```
+     Restart sshd using ``` systemctl restart sshd  ```
+   
+* Edit vars/vars.yml
+
+   * Change custom_ip_check
+
+```
+  custom_ip_check: False
+```
+
+* Replace IP in inventory/inventory_aws with Your machine IP
+
+* Run Ansible commands in the following sequence mentioned:
+
+```
+ansible- playbook -i inventory/inventory_aws scripts/ansible-scripts/prerequisite/python.yml -k
+ansible- playbook -i inventory/inventory_aws scripts/ansible-scripts/prerequisite/playbook.yml -k
+ansible- playbook -i inventory/inventory_aws scripts/ansible-scripts/machine-setup/playbook.yml -k
+ansible- playbook -i inventory/inventory_aws scripts/ansible-scripts/apache-hadoop/playbook.yml -k
+ansible- playbook -i inventory/inventory_aws scripts/ansible-scripts/webserver/playbook.yml -k
+ansible- playbook -i inventory/inventory_aws scripts/ansible-scripts/apache-hadoop/startCluster.yml -k
+```
 
 # Starting / stoping services manually
 --------------------------------------------------------------------------------
